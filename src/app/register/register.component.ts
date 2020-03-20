@@ -20,15 +20,24 @@ export class RegisterComponent implements OnInit {
     ns: new FormControl(''),
     status: new FormControl(''),
     profile_pic: new FormControl(''),
-    operations:new FormControl('insert'),
+
   });
   constructor(private http:HttpClient) { 
-    this.http.get('src/api/operations.php')
   }
 
   saveuser(){
-    'src/api/operations.php';
+    var data = JSON.stringify(this.registerform.value);
     console.log(this.registerform.value);
+    this.http.post('http://localhost/operations.php?op=insert',data).subscribe(
+      data=>{
+        console.log('Post Request is Successfull'+data);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+
+
   }
 
   ngOnInit(): void {

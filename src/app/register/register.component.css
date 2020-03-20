@@ -1,0 +1,24 @@
+
+.adduser,.upload-file {
+    margin-bottom: 25px !important;
+    width: 350px;
+    text-align: center;
+    margin: 0 auto; 
+margin-top:30px;
+ 
+}
+.adduser{
+    text-align: center;
+
+}
+.gender-radio{
+    /* margin-right: 240px;  */
+    left:30px;
+}
+
+.md-form .custom-control label{
+    cursor: pointer !important;
+}
+.md-form.input-group label{
+    width:300px !important;
+}

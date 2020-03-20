@@ -1,12 +1,74 @@
-<div class="container-fluid">
-<form>      <div class="row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
-          </div>
+<div class="container-fluid adduser card">
+  <form [formGroup]="registerform" (submit)="saveuser()">
+    <h3 style="text-align: center; " class="card-head">Add User</h3>
+    <div class="card-body">
+      <div class="md-form">
+
+        <label for="name">Name</label>
+
+        <input type="text" id="name" class="form-control" formControlName="name" required>
+
+      </div>
+      <div class="md-form">
+
+        <label for="email">Email</label>
+
+        <input type="text" id="email" class="form-control" formControlName="email" required>
+      </div>
+      <div class="md-form">
+        <input placeholder="DOB" type="date" id="date-picker-example" class="form-control datepicker"
+          formControlName="dob" >
+      </div>
+
+      <div class="md-form">
+
+        <label for="pass">Your password</label>
+
+        <input type="password" id="pass" class="form-control" formControlName="pass" required>
+
+      </div>
+      <label>Gender</label>
+
+      <div class="md-form  gender-radio">
+
+        <div class="custom-control custom-radio">
+
+          <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="male" value="male" formControlName="male">
+          <label class="custom-control-label" for="defaultGroupExample1">Male</label>
         </div>
-    </form>
-  
-  </div>
+
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="fmale"
+            value="fmale" formControlName="fmale">
+          <label class="custom-control-label" for="defaultGroupExample2">Female</label>
+        </div>
+
+        <div class="custom-control custom-radio    ">
+          <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="ns" value="ns" formControlName="ns">
+          <label class="custom-control-label" for="defaultGroupExample3">Not Specified</label>
+        </div>
+      </div>
+      <br>
+      <label>Martial Status</label>
+      <select class="mdb-select md-form" style="width:250px" formControlName="status">
+        <option value=""selected></option>
+        <option value="1">Single</option>
+        <option value="2">Married</option>
+      </select>
+
+      <div class="input-group upload-file md-form">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" formControlName="profile_pic">
+          <label class="custom-file-label" for="inputGroupFile01">Profile pics</label>
+        </div>
+      </div>
+      
+
+      <div class="text-center"> <button class="btn btn-success" [disabled]="!registerform.valid">Sign up</button>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

@@ -7,7 +7,12 @@ import { ControlContainer, NgForm } from '@angular/forms';
 
 
 
-const routes: Routes = [{path:'adduser',component:RegisterComponent},{path:'listing',component:ListingComponent,data:{title:"Listing"}},{path:'home',component:HomeComponent}];
+const routes: Routes = [
+  {path:'adduser',component:RegisterComponent},
+  {path:'listing',component:ListingComponent,data:{title:"Listing"}},
+  {path:'home',component:HomeComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

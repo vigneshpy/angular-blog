@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { ListingComponent } from './listing/listing.component';
 import { HomeComponent } from './home/home.component';
-@NgModule({
+import  {HttpClientModule}  from '@angular/common/http';
+@NgModule({ 
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -21,8 +20,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatInputModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

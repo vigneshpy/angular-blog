@@ -13,7 +13,7 @@ export class ListingComponent implements OnInit {
 
    deleteuser(id){
     this.del_data={'user_id':id};
-    this.http.post('http://vickypotter2516.000webhostapp.com/operations.php?op=delete',this.del_data).subscribe(data=>{
+    this.http.post('https://vickypotter2516.000webhostapp.com/operations.php?op=delete',this.del_data).subscribe(data=>{
       console.log(data);
       this.retrive();
 
@@ -25,7 +25,7 @@ export class ListingComponent implements OnInit {
   }
 
   retrive(){
-    this.http.get('http://vickypotter2516.000webhostapp.com/operations.php?op=retrive').subscribe(data=>{
+    this.http.get('https://vickypotter2516.000webhostapp.com/operations.php?op=retrive').subscribe(data=>{
       this.user=data
     },
     error=>{

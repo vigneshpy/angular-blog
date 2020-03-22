@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   saveuser(){
     var data = JSON.stringify(this.registerform.value);
     console.log(this.registerform.value);
-    this.http.post('http://vickypotter2516.000webhostapp.com/operations.php?op=insert',data).subscribe(
+    this.http.post('https://vickypotter2516.000webhostapp.com/operations.php?op=insert',data).subscribe(
       data=>{
         console.log('Post Request is Successfull'+data);
         
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 updateuser(id){
   var data = JSON.stringify(this.registerform.value);
   console.log(this.registerform.value);
-  this.http.post('http://vickypotter2516.000webhostapp.com/operations.php?op=update&user_id='+id,data).subscribe(
+  this.http.post('https://vickypotter2516.000webhostapp.com/operations.php?op=update&user_id='+id,data).subscribe(
     data=>{
       console.log('Post Request is Successfull'+data);
       
@@ -57,7 +57,7 @@ updateuser(id){
 
 }
   retrive_update(id){
-    this.http.post('http://vickypotter2516.000webhostapp.com/operations.php?op=rupdate',id).subscribe(data=>{
+    this.http.post('https://vickypotter2516.000webhostapp.com/operations.php?op=rupdate',id).subscribe(data=>{
       console.log(data);
       this.registerform.patchValue({
         name:data['name'],

@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
+  user:object;
+  del_data:object;
+  editvariable:string;
+  constructor(private http:HttpClient) { }
 
-  constructor() { }
+   deleteuser(id){
+    this.del_data={'user_id':id};
+    this.http.post('http://vickypotter2516.000webhostapp.com/operations.php?op=delete',this.del_data).subscribe(data=>{
+      console.log(data);
+      this.retrive();
+
+    },
+    error=>{
+      console.log(error);
+    }
+    )
+  }
+
+  retrive(){
+    this.http.get('http://vickypotter2516.000webhostapp.com/operations.php?op=retrive').subscribe(data=>{
+      this.user=data
+    },
+    error=>{
+      console.log(error);
+    }
+    )
+  }
 
   ngOnInit(): void {
+    this.editvariable='/edituser';
+    this.retrive();
   }
 
 }

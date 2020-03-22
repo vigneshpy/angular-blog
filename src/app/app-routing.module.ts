@@ -11,6 +11,8 @@ const routes: Routes = [
   {path:'adduser',component:RegisterComponent},
   {path:'listing',component:ListingComponent,data:{title:"Listing"}},
   {path:'home',component:HomeComponent},
+  {path:'edituser/:id',component:RegisterComponent},
+
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

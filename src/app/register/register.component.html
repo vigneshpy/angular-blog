@@ -1,6 +1,10 @@
+
 <div class="container-fluid adduser card">
-  <form [formGroup]="registerform" (submit)="saveuser()">
-    <h3 style="text-align: center; " class="card-head">Add User</h3>
+  <form [formGroup]="registerform">
+    <h3 style="text-align: center; " class="card-head" *ngIf="!user_id; else elseblock">Add User</h3>
+    <ng-template #elseblock>
+      <h3 style="text-align: center; " class="card-head">Update User</h3>
+    </ng-template>
     <div class="card-body">
       <div class="md-form">
 
@@ -52,8 +56,8 @@
       <label>Martial Status</label>
       <select class="mdb-select md-form" style="width:250px" formControlName="status">
         <option value=""selected></option>
-        <option value="1">Single</option>
-        <option value="2">Married</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
       </select>
 
       <div class="input-group upload-file md-form">
@@ -64,11 +68,19 @@
       </div>
     
 
-      <div class="text-center"> <button class="btn btn-success">Sign up</button>
+      <div class="text-center" *ngIf="!user_id"> <button class="btn btn-success"  (click)="saveuser()">Sign up</button>
+
       </div>
+      <div class="text-center" *ngIf="user_id"> <button class="btn btn-success"  (click)="updateuser(user_id)">Update</button>
+
+      </div>
+      <!-- <div class="text-center"> <button class="btn btn-success">Update</button> -->
+        
+      <!-- </div> -->
 
     </div>
 
   </form>
-
 </div>
+
+

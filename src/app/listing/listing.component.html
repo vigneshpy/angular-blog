@@ -6,19 +6,22 @@
   <div *ngFor="let item of user">
 
     <div class="col col-md col-xs">
-  <div class="card" style="margin: 10px 0px;width:300px;height: 270px;">
-    <!-- <div class="card-body">      
-   
-      </div> -->
+  <div class="card" style="margin: 10px 0px;width:300px;">
+    <img class="card-img-top"   style="max-height:225px;" *ngIf="item.profile_pic; else elseblock"src=".../../api/upload/5e7b3e3e5dcee.jpg" alt="Profile pic"/> 
+
+    <ng-template #elseblock>
+      <img class="card-img-top" style="max-height:225px;" src="assets/img.jpg" alt="Profile pic"/> 
+      </ng-template>
+      <a class="card-img-top" href="../../api/upload/5e7b3e3e5dcee.jpg" alt="Profile pic">Test</a> 
       <div class="card-body">
 
         <!-- Title -->
-        <h4 class="card-title"><a><p>{{item.name}}'s Details</p></a></h4>
+        <h4 class="card-title"><a><p>{{item.name}}'s Bio</p></a></h4>
         <p class="card-text">{{item.name}}</p>
        <p class="card-text"> {{item.dob | date:'MMM d, y'}}</p>
         <p class="card-text">{{item.email}}</p>
         <p class="card-text"> {{item.status}}</p>
-        <p class="card-text">{{item.male}}</p> 
+        <p class="card-text">{{item.gender}}</p> 
         <a class="btn btn-primary" [routerLink]="[editvariable,item.id]">Edit</a>
         <a  class="btn btn-danger" (click)='deleteuser(item.id)'>Delete</a>
     

@@ -1,6 +1,6 @@
 
 <div class="container-fluid adduser card">
-  <form [formGroup]="registerform">
+  <form [formGroup]="registerform"  enctype='multipart/form-data'>
     <h3 style="text-align: center; " class="card-head" *ngIf="!user_id; else elseblock">Add User</h3>
     <ng-template #elseblock>
       <h3 style="text-align: center; " class="card-head">Update User</h3>
@@ -11,17 +11,35 @@
         <label for="name">Name</label>
 
         <input type="text" id="name" class="form-control" formControlName="name" required>
-
+   
+<div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)"
+class="" style="color:red;">
+<div *ngIf="f.name.errors.required">
+  Name is required.
+</div>
+</div>
       </div>
       <div class="md-form">
 
         <label for="email">Email</label>
 
         <input type="text" id="email" class="form-control" formControlName="email" required>
+        <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
+class="" style="color:red;">
+<div *ngIf="f.email.errors.required">
+  Email is required.
+</div>
+<div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+</div>
       </div>
       <div class="md-form">
         <input placeholder="DOB" type="date" id="date-picker-example" class="form-control datepicker"
-          formControlName="dob" >
+          formControlName="dob" required>
+          <div *ngIf="f.dob.invalid && (f.dob.dirty || f.dob.touched)"
+          class="" style="color:red;">
+          <div *ngIf="f.dob.errors.required">DOB is required</div>
+  
+          </div>
       </div>
 
       <div class="md-form">
@@ -29,29 +47,28 @@
         <label for="pass">Your password</label>
 
         <input type="password" id="pass" class="form-control" formControlName="pass" required>
-
+        <div *ngIf="f.pass.invalid && (f.pass.dirty || f.pass.touched)"
+        class="" style="color:red;">
+        <div *ngIf="f.pass.errors.required">Password is required</div>
+        <div *ngIf="f.pass.errors.minlength">Password must be at least 6 characters</div>
+        </div>
       </div>
       <label>Gender</label>
 
-      <div class="md-form  gender-radio">
+
 
         <div class="custom-control custom-radio">
 
-          <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="male" value="male" formControlName="male">
+          <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="gender" value="male" formControlName="gender" >
           <label class="custom-control-label" for="defaultGroupExample1">Male</label>
         </div>
 
         <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="fmale"
-            value="fmale" formControlName="fmale">
+          <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="gender"
+            value="fmale" formControlName="gender">
           <label class="custom-control-label" for="defaultGroupExample2">Female</label>
         </div>
 
-        <div class="custom-control custom-radio    ">
-          <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="ns" value="ns" formControlName="ns">
-          <label class="custom-control-label" for="defaultGroupExample3">Not Specified</label>
-        </div>
-      </div>
       <br>
       <label>Martial Status</label>
       <select class="mdb-select md-form" style="width:250px" formControlName="status">
@@ -59,24 +76,29 @@
         <option value="Single">Single</option>
         <option value="Married">Married</option>
       </select>
+      <label style="text-align:center">Profile Pic</label>
+      <img [src]="url" *ngIf="url" width="250" height="100"/>
 
       <div class="input-group upload-file md-form">
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" formControlName="profile_pic">
-          <label class="custom-file-label" for="inputGroupFile01">Profile pics</label>
+          <!-- <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" formControlName="profile_pic" style="display: none;"> -->
+          <input type="file" name="profile_pic" (change)="onFileChange($event)"  accept=".png, .jpg, .jpeg"  />
+          <!-- <label class="custom-file-label" for="inputGroupFile01">Profile pics</label> -->
         </div>
       </div>
     
 
-      <div class="text-center" *ngIf="!user_id"> <button class="btn btn-success"  (click)="saveuser()">Sign up</button>
+      <div class="text-center" *ngIf="!user_id">
+         <button class="btn btn-success"   [disabled]="registerform.valid" (click)="saveuser()">Sign up</button>
 
       </div>
-      <div class="text-center" *ngIf="user_id"> <button class="btn btn-success"  (click)="updateuser(user_id)">Update</button>
+      <div class="text-center" *ngIf="user_id"> <button class="btn btn-success" [disabled]="registerform.valid"  (click)="updateuser(user_id)">Update</button>
 
       </div>
       <!-- <div class="text-center"> <button class="btn btn-success">Update</button> -->
         
       <!-- </div> -->
+
 
     </div>
 

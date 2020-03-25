@@ -112,7 +112,7 @@ updateuser(id){
         profile_pic:data['profile_pic']
       });
       
-      // this.singleuser=data;
+     this.url="http://localhost/upload/"+data['profile_pic'];
     },error=>{
       console.log(error)
     })

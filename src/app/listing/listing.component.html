@@ -7,12 +7,11 @@
 
     <div class="col col-md col-xs">
   <div class="card" style="margin: 10px 0px;width:300px;">
-    <img class="card-img-top"   style="max-height:225px;" *ngIf="item.profile_pic; else elseblock"src=".../../api/upload/5e7b3e3e5dcee.jpg" alt="Profile pic"/> 
+  <img class="card-img-top" src="http://localhost/upload/{{item.profile_pic}}"   style="max-height:225px;" *ngIf="item.profile_pic; else elseblock" alt="Profile pic" />
 
     <ng-template #elseblock>
-      <img class="card-img-top" style="max-height:225px;" src="assets/img.jpg" alt="Profile pic"/> 
+      <img class="card-img-top" style="max-height:225px" src="http://localhost/upload/{{item.profile_pic}}" alt="Profile pic"/> 
       </ng-template>
-      <a class="card-img-top" href="../../api/upload/5e7b3e3e5dcee.jpg" alt="Profile pic">Test</a> 
       <div class="card-body">
 
         <!-- Title -->

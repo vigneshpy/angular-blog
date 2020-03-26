@@ -88,6 +88,7 @@ function update($id)
 {
     require_once ('db.php');
     $folderPath = 'upload/';
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $name = $_POST['name'];
@@ -97,6 +98,9 @@ function update($id)
         $gender = $_POST['gender'];
         $status = $_POST['status'];
         $profile_pic='';
+        if(isset($_POST['profile_pic'])){
+            $profile_pic=$_POST['profile_pic'];
+        }
         if (isset($_FILES['profile_pic']))
         {
             $profile_pic_temp = $_FILES['profile_pic']['tmp_name'];
@@ -108,12 +112,6 @@ function update($id)
             {
                 $profile_pic = $file;
             }
-            else
-            {
-                $profile_pic = '';
-
-            }
-
         }
 
         $sql = "update  users set name='$name',email='$email',password='$pass',dob='$dob',gender='$gender',profile_pic='$profile_pic',status='$status' where id='$id'";

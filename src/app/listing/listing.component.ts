@@ -7,15 +7,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListingComponent implements OnInit {
   user: object;
-  del_data: object;
   editvariable: string;
   constructor(private http: HttpClient) { }
 
 deleteuser(id) {
     this.http.get('http://localhost/operations.php?op=delete&user_id=' + id).subscribe(data => {
-      console.log(data);
       this.retrive();
-      alert('user removed')
 
     },
       error => {

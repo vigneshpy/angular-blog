@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+// import { $ } from 'protractor';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
  user_id:object;
  url:string;
  singleuser:object;
@@ -26,27 +28,28 @@ export class RegisterComponent implements OnInit {
   constructor(private http:HttpClient,private route:ActivatedRoute) { 
   }
   get f() { return this.registerform.controls; }
-  onFileChange(event) {
  
+  onFileChange(event) {
+
     let valid=true;
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       if(!this.validateFile(file.name)){
         alert('Invalid File type only png and jpg is allowed');
-        this.registerform.patchValue({
-          profile_pic: ''
-        });
+        this.registerform.get('profile_pic').setValue('');
+
         valid=false;
       }
       if(valid){
+      
         var  reader=new FileReader();
         reader.readAsDataURL(file);
         reader.onload=(event:any)=>{
           this.url=event.target.result;
         }
-      this.registerform.patchValue({
-        profile_pic: file
-      });
+        this.registerform.get('profile_pic').setValue(file);
+
+
     }
      
     }
@@ -77,6 +80,7 @@ export class RegisterComponent implements OnInit {
     this.http.post('http://localhost/operations.php?op=insert',formdata).subscribe(
       data=>{
         console.log('Post Request is Successfull'+data);
+        alert('User Saved');
         
       },
       error=>{
@@ -91,7 +95,7 @@ updateuser(id){
   this.http.post('http://localhost/operations.php?op=update&user_id='+id,formdata).subscribe(
     data=>{
       console.log('Post Request is Successfull'+data);
-      
+      alert('User Updated');
     },
     error=>{
       console.log(error);
@@ -101,7 +105,7 @@ updateuser(id){
 }
   retrive_update(id){
     
-    this.http.post('http://localhost/operations.php?op=rupdate',id).subscribe(data=>{
+    this.http.get('http://localhost/operations.php?op=rupdate&user_id='+id).subscribe(data=>{
     
       this.registerform.patchValue({
         name:data['name'],
@@ -111,7 +115,7 @@ updateuser(id){
         status:data['status'],
         profile_pic:data['profile_pic']
       });
-      
+    this.registerform.get('profile_pic').setValue(data['profile_pic']);
      this.url="http://localhost/upload/"+data['profile_pic'];
     },error=>{
       console.log(error)
@@ -125,7 +129,6 @@ updateuser(id){
      if(typeof this.user_id!='undefined'){
        this.retrive_update(this.user_id);
          this.user_id=this.user_id;
-         console.log('working');
 
      }
 })

@@ -6,36 +6,36 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
-  user:object;
-  del_data:object;
-  editvariable:string;
-  constructor(private http:HttpClient) { }
+  user: object;
+  del_data: object;
+  editvariable: string;
+  constructor(private http: HttpClient) { }
 
-   deleteuser(id){
-    this.del_data={'user_id':id};
-    this.http.post('http://localhost/operations.php?op=delete',this.del_data).subscribe(data=>{
+deleteuser(id) {
+    this.http.get('http://localhost/operations.php?op=delete&user_id=' + id).subscribe(data => {
       console.log(data);
       this.retrive();
+      alert('user removed')
 
     },
-    error=>{
-      console.log(error);
-    }
+      error => {
+        console.log(error);
+      }
     )
   }
 
-  retrive(){
-    this.http.get('http://localhost/operations.php?op=retrive').subscribe(data=>{
-      this.user=data
+  retrive() {
+    this.http.get('http://localhost/operations.php?op=retrive').subscribe(data => {
+      this.user = data
     },
-    error=>{
-      console.log(error);
-    }
+      error => {
+        console.log(error);
+      }
     )
   }
 
   ngOnInit(): void {
-    this.editvariable='/edituser';
+    this.editvariable = '/edituser';
     this.retrive();
   }
 

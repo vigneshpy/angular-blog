@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'edituser/:id',component:RegisterComponent},
 
-  // {path: '', redirectTo: 'home', pathMatch: 'full'}
+  {path: '', redirectTo: 'listing', pathMatch: 'full'}
 ];
 
 @NgModule({
